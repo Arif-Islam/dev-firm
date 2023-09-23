@@ -1,11 +1,20 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { NextApiRequest, NextApiResponse } from 'next';
+import { client } from "../invoice";
+
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  res.status(200).json(req);
+  try {
+    const data = JSON.stringify(client, null, 2);
+    console.log(data);
+    res.send({
+      data: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
-
